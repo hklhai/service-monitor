@@ -1,10 +1,33 @@
 eureka:
   client:
     serviceUrl:
-      # ע���Լ��ķ���ע�����ĵĵ�ַ
+      # 注明自己的服务注册中心的地址
       defaultZone: http://localhost:7777/eureka/
 server:
   port: 8555
 spring:
   application:
     name: service-feign
+  boot:
+    admin:
+      client:
+        url: "http://localhost:9997"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+feign:
+  hystrix:
+    enabled: true
+
+turbine:
+  # 配置 eureka-server 中的 serviceId 列表，指定要监控的服务
+  app-config: service-analysis,service-report,service-ribbon,service-zuul
+  aggregator:
+    cluster-config: default
+  # 指定集群名称
+  cluster-name-expression: "'default'"

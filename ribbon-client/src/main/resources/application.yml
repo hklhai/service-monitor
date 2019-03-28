@@ -6,4 +6,16 @@ server:
   port: 8004
 spring:
   application:
-    name: ribbon-client
+    name: service-ribbon
+  boot:
+    admin:
+      client:
+        url: "http://localhost:9997"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
